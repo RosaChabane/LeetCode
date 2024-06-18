@@ -46,7 +46,7 @@
 //My Solution:
 
 // MY ORIGINAL SOLUTION:
-// Although the following solution works, it is not the most efficient, taking around 140ms 
+// Although the following solution works, it is not the most efficient for larger arrays (taking around 140ms) 
 // Time Complexity = O(n^2)
 
 /**
@@ -65,6 +65,18 @@ var removeDuplicates = function(nums) {
 };
 
 
+// Explanation on this solution:
+// - Run a loop with condition that removes an elements using splice if those two elements are equal (meaning if element is not unique).
+// - Decrement i by 1 because the index will change due to splice shifting elements after removal.
+// - Return the length of in-place modified nums array (k).
+
+
+// The time complexity of O(n^2) is due to the .splice() method being used inside the loop:
+// - The loop itself will perform an operation on every element in the array --> O(n)
+// - Splice will also run an operation on every element in the array as well -- O(n)
+// - Result = O(n) * O(n) --> O(n^2)
+// - When splice removes an element from the array, it will shift all elements to the left to fill that now empty space, which is time-consuming. 
+
 
 // MY UPDATED SOLUTION USING TWO-POINTER TECHNIQUE:
 // Runtime: around 60ms
@@ -82,15 +94,15 @@ var removeDuplicates = function(nums) {
             nums[j] = nums[i];
         }
     }
-    return j + 1; // Length of the array with unique elements
+    return j + 1; 
 };
 
 
-
-//My Explanation:
-
-
-
+// My Explanation:
+// - Initalize 'j' as 0, this will be used as starting index of unique elements in nums.
+// - Start the loop at index 1 (since j starts at 0).
+// - When the condition finds elements that aren't equal (unique), increment 'j' and assign nums[j] to nums[i].
+// - Return j + 1 to get the count of unique elements, since 'j' starts at zero.
 
 
 //Tests:
